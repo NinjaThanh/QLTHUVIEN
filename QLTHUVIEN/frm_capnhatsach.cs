@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -44,26 +44,33 @@ namespace WindowsFormsApplication1
             dt_capnhatsach.Enabled = true;
 
         }
-        private void loadcombo() {
+        private void loadcombo()
+        {
             DataTable dt = t.docdulieu("select * from nhaxb");
             DataTable dt1 = t.docdulieu("select * from theloai");
             DataTable dt2 = t.docdulieu("select * from tacgia");
 
-           
+            if (dt.Columns.Contains("manxb") && dt1.Columns.Contains("matheloai") && dt2.Columns.Contains("matacgia"))
+            {
                 ComboBox_nhaxb.DataSource = dt;
                 ComboBox_nhaxb.DisplayMember = "tennxb";
                 ComboBox_nhaxb.ValueMember = "manxb";
-                //comnhaxb.DisplayMember = "tennxb";
-                //comnhaxb.ValueMember = "manxb";
+
                 ComboBox_theloai.DataSource = dt1;
                 ComboBox_theloai.DisplayMember = "tentheloai";
                 ComboBox_theloai.ValueMember = "matheloai";
+
                 ComboBox_matacgia.DataSource = dt2;
                 ComboBox_matacgia.DisplayMember = "tentacgia";
                 ComboBox_matacgia.ValueMember = "matacgia";
-        
+            }
+            else
+            {
+                MessageBox.Show("Một hoặc nhiều cột bị thiếu trong DataTables.");
+            }
         }
-       
+
+
 
         private void Formcapnhatsach_Load(object sender, EventArgs e)
         {
